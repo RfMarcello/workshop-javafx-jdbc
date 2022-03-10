@@ -69,10 +69,10 @@ public class DepartmentListController implements Initializable, DataChangeListen
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		initilizeNodes();
+		initializeNodes();
 	}
 
-	private void initilizeNodes() {
+	private void initializeNodes() {
 		tableColumnId.setCellValueFactory(new PropertyValueFactory<>("id"));
 		tableColumnName.setCellValueFactory(new PropertyValueFactory<>("name"));
 
@@ -91,9 +91,9 @@ public class DepartmentListController implements Initializable, DataChangeListen
 		initRemoveButtons();
 	}
 
-	private void createDialogForm(Department obj, String absolutName, Stage parentStage) {
+	private void createDialogForm(Department obj, String absoluteName, Stage parentStage) {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource(absolutName));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
 			Pane pane = loader.load();
 
 			DepartmentFormController controller = loader.getController();
@@ -110,6 +110,7 @@ public class DepartmentListController implements Initializable, DataChangeListen
 			dialogStage.initModality(Modality.WINDOW_MODAL);
 			dialogStage.showAndWait();
 		} catch (IOException e) {
+			e.printStackTrace();
 			Alerts.showAlert("IO Exception", "Error loading view", e.getMessage(), AlertType.ERROR);
 		}
 	}
@@ -158,7 +159,7 @@ public class DepartmentListController implements Initializable, DataChangeListen
 
 	private void removeEntity(Department obj) {
 		Optional<ButtonType> result = Alerts.showConfirmation("Confirmation", "Are you sure to delete?");
-		
+
 		if (result.get() == ButtonType.OK) {
 			if (service == null) {
 				throw new IllegalStateException("Service was null");
